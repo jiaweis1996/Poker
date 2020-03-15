@@ -25,6 +25,8 @@
 /* Begin PBXFileReference section */
 		6B9543C6241D7B620070D820 /* Poker */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Poker; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B9543C9241D7B620070D820 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		6B9543D0241D7BD90070D820 /* Card.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Card.hpp; sourceTree = "<group>"; };
+		6B9543D1241DAED70070D820 /* Deck.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Deck.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,8 @@
 			isa = PBXGroup;
 			children = (
 				6B9543C9241D7B620070D820 /* main.cpp */,
+				6B9543D0241D7BD90070D820 /* Card.hpp */,
+				6B9543D1241DAED70070D820 /* Deck.hpp */,
 			);
 			path = Poker;
 			sourceTree = "<group>";
