@@ -19,15 +19,13 @@ struct Color
 class Card
 {
 public:
-    Card(int value, std::string color)
+    Card(int value, int color)
     : m_value(value)
     , m_color(color)
-    {
-        
-    }
+    {}
 private:
     int m_value;
-    std::string m_color;
+    int m_color;
 };
 
 #endif /* Card_h */

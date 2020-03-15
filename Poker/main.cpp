@@ -8,8 +8,11 @@
 
 #include <iostream>
 
+#include "Deck.hpp"
 
 int main()
 {
+    Deck my_deck();
+    return my_deck
     
 }
