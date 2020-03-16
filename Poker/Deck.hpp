@@ -9,24 +9,24 @@
 #ifndef Deck_h
 #define Deck_h
 
-#include "Card.hp">
+#include <vector>
 
-Class Deck
+#include "Card.hpp"
+
+
+class Deck
 {
 public:
-    Deck()
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            for (int j = 0; j < 13; j++)
-            {
-                m_Deck.push_back(Card(i,j));
-            }
-        }
-    }
+    Deck();
     
+    //void deck_shuffle(std::vector<Card> Card_Vector);
+
+    void deal();
+    
+    
+    std::vector<Card> m_Deck;
 private:
-    vector<Card> m_Deck;
-}
+    
+};
 
 #endif /* Deck_h */

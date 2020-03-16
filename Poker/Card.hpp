@@ -9,23 +9,55 @@
 #ifndef Card_h
 #define Card_h
 
+#include <iostream>
 #include <string>
 
-struct Color
+enum SUIT
 {
-    
-}
+    CLUB = 0,
+    DIAMOND = 1,
+    HEART = 2,
+    SPADE = 3
+};
+
+enum FACE_CARDS
+{
+    JACK = 11,
+    QUEEN = 12,
+    KING = 13,
+    ACE = 14
+};
+
+
+const int MIN_CARD_VALUE = 2;
+const int MAX_CARD_VALUE = ACE;
+
+const int NUM_SUITS = 4;
+const int MIN_SUIT = CLUB;
+const int MAX_SUIT = SPADE;
+
 
 class Card
 {
 public:
-    Card(int value, int color)
-    : m_value(value)
-    , m_color(color)
-    {}
+    Card(const int value, const int suit);
+    
+    const int get_value () const;
+    const int get_suit () const;
+    
+    std::string ToString() const;
+    
+    
+    
 private:
     int m_value;
-    int m_color;
+    int m_suit;
 };
+
+std::ostream& operator << (std::ostream &os, const Card &card);
+bool operator == (const Card &card1, const Card &card2);
+
+std::string CardValueToString(const int value);
+std::string CardSuitToString(const int suit);
 
 #endif /* Card_h */

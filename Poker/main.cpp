@@ -7,12 +7,25 @@
 //
 
 #include <iostream>
+#include <memory>
+#include <vector>
 
 #include "Deck.hpp"
 
+
 int main()
 {
-    Deck my_deck();
-    return my_deck
+    std::unique_ptr<Deck> mydeck;
+    mydeck.reset(new Deck());
     
+   // Deck my_deck();
+    
+    std::vector<Card> my_card = mydeck-> m_Deck;
+    
+    Card test = my_card[0];
+    
+    
+    std::cout<< test << std::endl;
+    
+    return 0;
 }
