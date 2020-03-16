@@ -10,6 +10,7 @@
 		6B9543CA241D7B620070D820 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B9543C9241D7B620070D820 /* main.cpp */; };
 		6B9543D3241DBB6E0070D820 /* Card.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B9543D2241DBB6E0070D820 /* Card.cpp */; };
 		6B9543D5241EF3BB0070D820 /* Deck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B9543D4241EF3BB0070D820 /* Deck.cpp */; };
+		6B9543D8241F235F0070D820 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B9543D6241F235F0070D820 /* Player.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,9 @@
 		6B9543D1241DAED70070D820 /* Deck.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Deck.hpp; sourceTree = "<group>"; };
 		6B9543D2241DBB6E0070D820 /* Card.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Card.cpp; sourceTree = "<group>"; };
 		6B9543D4241EF3BB0070D820 /* Deck.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Deck.cpp; sourceTree = "<group>"; };
+		6B9543D6241F235F0070D820 /* Player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		6B9543D7241F235F0070D820 /* Player.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Player.hpp; sourceTree = "<group>"; };
+		6B9543D9241F3E1F0070D820 /* Dealer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Dealer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +72,9 @@
 				6B9543D2241DBB6E0070D820 /* Card.cpp */,
 				6B9543D1241DAED70070D820 /* Deck.hpp */,
 				6B9543D4241EF3BB0070D820 /* Deck.cpp */,
+				6B9543D6241F235F0070D820 /* Player.cpp */,
+				6B9543D7241F235F0070D820 /* Player.hpp */,
+				6B9543D9241F3E1F0070D820 /* Dealer.hpp */,
 			);
 			path = Poker;
 			sourceTree = "<group>";
@@ -129,6 +136,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B9543D8241F235F0070D820 /* Player.cpp in Sources */,
 				6B9543D5241EF3BB0070D820 /* Deck.cpp in Sources */,
 				6B9543CA241D7B620070D820 /* main.cpp in Sources */,
 				6B9543D3241DBB6E0070D820 /* Card.cpp in Sources */,

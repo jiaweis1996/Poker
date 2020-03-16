@@ -11,6 +11,7 @@
 #include <vector>
 
 #include "Deck.hpp"
+#include "Player.hpp"
 
 
 int main()
@@ -20,12 +21,14 @@ int main()
     
    // Deck my_deck();
     
-    std::vector<Card> my_card = mydeck-> m_Deck;
+    Player p1 = Player(300,1);
+    Player p2 = Player(300,2);
     
-    Card test = my_card[0];
+    p1.Action();
+    p2.Action();
     
     
-    std::cout<< test << std::endl;
+    std::cout<< "haha" << std::endl;
     
     return 0;
 }
