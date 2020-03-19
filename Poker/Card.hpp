@@ -42,8 +42,8 @@ class Card
 public:
     Card(const int value, const int suit);
     
-    const int get_value () const;
-    const int get_suit () const;
+    const int GetValue () const;
+    const int GetSuit () const;
     
     std::string ToString() const;
     

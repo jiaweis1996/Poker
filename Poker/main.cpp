@@ -12,23 +12,43 @@
 
 #include "Deck.hpp"
 #include "Player.hpp"
+#include "Hand.hpp"
 
 
 int main()
 {
-    std::unique_ptr<Deck> mydeck;
-    mydeck.reset(new Deck());
+    //Card (value,suit)
+//    std::unique_ptr<Deck> mydeck;
+//    mydeck.reset(new Deck());
+//
+//   // Deck my_deck();
+//
+//    Player p1 = Player(300,1);
+//    Player p2 = Player(300,2);
+//
+//    p1.Action();
+//    p2.Action();
     
-   // Deck my_deck();
+    Hand myhand;
     
-    Player p1 = Player(300,1);
-    Player p2 = Player(300,2);
+    Card c1 = Card(2,1);
+    Card c2 = Card(2,0);
+    Card c3 = Card(2,3);
+    Card c4 = Card(6,2);
+    Card c5 = Card(6,1);
+    Card c6 = Card(7,0);
     
-    p1.Action();
-    p2.Action();
+    myhand.AddCard(c1);
+    myhand.AddCard(c2);
+    myhand.AddCard(c3);
+    myhand.AddCard(c4);
+    myhand.AddCard(c5);
+    myhand.AddCard(c6);
     
+    std::string result = myhand.GetHandTextualDescription();
+
     
-    std::cout<< "haha" << std::endl;
+    std::cout<< result << std::endl;
     
     return 0;
 }
