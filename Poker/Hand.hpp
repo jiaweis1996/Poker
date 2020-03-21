@@ -62,12 +62,12 @@ private:
     const HandValue GetStraightFlushValue() const;
     const HandValue GetFourOfAKindValue()   const;
     const HandValue GetFullHouseValue()     const;
-//    const HandValue GetFlushValue()         const;
-//    const HandValue GetStraightValue()      const;
-//    const HandValue GetSetValue()           const;
-//    const HandValue GetTwoPairValue()       const;
-//    const HandValue GetPairValue()          const;
-//    const HandValue GetHighCardValue()      const;
+    const HandValue GetFlushValue()         const;
+    const HandValue GetStraightValue()      const;
+    const HandValue GetSetValue()           const;
+    const HandValue GetTwoPairValue()       const;
+    const HandValue GetPairValue()          const;
+    const HandValue GetHighCardValue()      const;
 
 };
 

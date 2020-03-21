@@ -44,18 +44,18 @@ void Hand::CalculateHandScore()
             &Hand::GetStraightFlushValue,
             &Hand::GetFourOfAKindValue,
             &Hand::GetFullHouseValue,
-//            &Hand::GetFlushValue,
-//            &Hand::GetStraightValue,
-//            &Hand::GetSetValue,
-//            &Hand::GetTwoPairValue,
-//            &Hand::GetPairValue,
-//            &Hand::GetHighCardValue
+            &Hand::GetFlushValue,
+            &Hand::GetStraightValue,
+            &Hand::GetSetValue,
+            &Hand::GetTwoPairValue,
+            &Hand::GetPairValue,
+            &Hand::GetHighCardValue
     };
     
     HandValue hand_score;
     
     //invoke until one returns
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 9; i++)
     {
         hand_score = (this->*(funcs[i]))();
         
@@ -297,6 +297,246 @@ const HandValue Hand::GetFullHouseValue() const
     {
         return HANDVALUE_NO_HAND;
     }
+}
+
+const HandValue Hand::GetFlushValue() const
+{
+    std::map <int,int> occur = {
+        {CLUB , 0},
+        {DIAMOND , 0},
+        {HEART, 0},
+        {SPADE, 0}
+        
+    };
+    
+    // Count card by suit
+    for (const Card& card: m_hand)
+    {
+        occur[card.GetSuit()]++;
+    }
+    
+    const Card* best_card = nullptr;
+    
+    for (int suit = 0; suit < NUM_SUITS; ++suit)
+    {
+        // Found Flush
+        if (occur[suit] >= 5)
+        {
+            // find highest card
+            for (const Card& card: m_hand)
+            {
+                if (card.GetSuit() == suit)
+                {
+                    if (best_card == nullptr || best_card ->GetValue() < card.GetValue())
+                        best_card = &card;
+                }
+            }
+            
+            assert(best_card != nullptr);
+            
+            HandValue retval;
+            retval.type = HT_FLUSH;
+            retval.PrimaryCard = best_card;
+            retval.SecondaryCard = nullptr;
+            return retval;
+        }
+    }
+    return HANDVALUE_NO_HAND;
+}
+
+const HandValue Hand::GetStraightValue() const
+{
+    std::map<int,int> occur;
+    for (int i = MIN_CARD_VALUE; i < MAX_CARD_VALUE; ++i)
+        occur[i] = 0;
+    
+    for (const Card& card: m_hand)
+    {
+        if (card.GetValue() == ACE) // Low Ace or High Ace
+        {
+            occur[1]++;
+            occur[ACE]++;
+        }
+        else
+        {
+            occur[card.GetValue()]++;
+        }
+    }
+    
+    int seq = 0;
+    int highestSoFar = -1;
+    
+    for (auto iter = occur.begin(); iter != occur.end(); iter++)
+    {
+        if (iter->second == 0)
+        {
+            seq = 0;
+        }
+        else
+        {
+            seq++;
+            if (seq >= 5)
+                highestSoFar = iter->first;
+        }
+    }
+    
+    if (highestSoFar != -1)
+    {
+        HandValue retval;
+        retval.type = HT_STRAIGHT;
+        retval.PrimaryCard = GetCardPtrAnySuit(highestSoFar);
+        retval.SecondaryCard = nullptr;
+        return retval;
+    }
+    else
+    {
+        return HANDVALUE_NO_HAND;
+    }
+}
+
+const HandValue Hand::GetSetValue() const
+{
+    std::map<int,int> occur;
+    for (int i = MIN_CARD_VALUE; i < MAX_CARD_VALUE; ++i)
+    {
+        occur[i] = 0;
+    }
+    
+    for (const Card& card: m_hand)
+    {
+        occur[card.GetValue()]++;
+    }
+    
+    for (auto iter = occur.rbegin(); iter != occur.rend(); iter++)
+    {
+        if (iter->second == 3)
+        {
+            HandValue retval;
+            retval.type = HT_SET;
+            retval.PrimaryCard = GetCardPtrAnySuit(iter->first);
+            retval.SecondaryCard = nullptr;
+            return retval;
+        }
+    }
+    
+    return HANDVALUE_NO_HAND;
+}
+
+const HandValue Hand::GetTwoPairValue() const
+{
+    std::map <int,int> occur;
+    
+    for (int i = MIN_CARD_VALUE; i < MAX_CARD_VALUE; ++i)
+    {
+        occur[i] = 0;
+    }
+    
+    for (const Card& card: m_hand)
+    {
+        occur[card.GetValue()]++;
+    }
+    
+    int first_pair_value = -1;
+    
+    for (auto iter = occur.rbegin(); iter != occur.rend(); iter++)
+    {
+        if (iter->second == 2)
+        {
+            if (first_pair_value == -1)
+                first_pair_value = iter->first;
+            else
+            {
+                HandValue retval;
+                retval.type = HT_TWO_PAIR;
+                retval.PrimaryCard = GetCardPtrAnySuit(first_pair_value);
+                retval.SecondaryCard = GetCardPtrAnySuit(iter->first);
+                return retval;
+            }
+        }
+    }
+    return HANDVALUE_NO_HAND;
+}
+
+const HandValue Hand::GetPairValue() const
+{
+    std::map <int,int> occur;
+    for (int i = MIN_CARD_VALUE; i < MAX_CARD_VALUE; ++i)
+    {
+        occur[i] = 0;
+    }
+    
+    for (const Card& card: m_hand)
+    {
+        occur[card.GetValue()]++;
+    }
+    
+    for (auto iter = occur.rbegin(); iter != occur.rend(); iter++)
+    {
+        if (iter->second == 2)
+        {
+            HandValue retval;
+            retval.type = HT_PAIR;
+            retval.PrimaryCard = GetCardPtrAnySuit(iter->first);
+            retval.SecondaryCard = nullptr;
+            return retval;
+        }
+    }
+    return HANDVALUE_NO_HAND;
+}
+
+const HandValue Hand::GetHighCardValue() const
+{
+    const Card* best_card = nullptr;
+    
+    for (const Card& card: m_hand)
+    {
+        if (best_card == nullptr)
+            best_card = &card;
+        else if (best_card->GetValue() < card.GetValue())
+            best_card = &card;
+    }
+    
+    HandValue retval;
+    retval.type = HT_HIGH_CARD;
+    retval.PrimaryCard = best_card;
+    retval.SecondaryCard = nullptr;
+    return retval;
+}
+
+int hand_compare(const Hand* hand1, const Hand* hand2)
+{
+    const HandValue& score1 = hand1->GetBestHandValue();
+    const HandValue& score2 = hand2->GetBestHandValue();
+    
+    if (score1.type > score2.type)
+        return -1;
+    else if (score1.type < score2.type)
+        return 1;
+    
+    // Same type of hands, need to compare high cards. (e.g: straight or flush)
+    if (score1.PrimaryCard->GetValue() > score2.PrimaryCard->GetValue())
+        return -1;
+    else if (score1.PrimaryCard->GetValue() < score2.PrimaryCard->GetValue())
+        return 1;
+    
+    // Primary Card equal, compare secondary card
+    
+    if (score1.type == HT_FULL_HOUSE || score1.type == HT_TWO_PAIR)
+    {
+        if (score1.SecondaryCard->GetValue() > score2.SecondaryCard->GetValue())
+            return -1;
+        else if (score1.SecondaryCard->GetValue() < score2.SecondaryCard->GetValue())
+            return 1;
+    }
+    
+    // No Need to Compare suit
+    return 0; // exact same hand value
+}
+
+std::ostream& operator <<(std::ostream& os, const Hand& hand)
+{
+    os << hand.ToString();
+    return os;
 }
 
 
